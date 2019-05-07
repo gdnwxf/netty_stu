@@ -1,7 +1,6 @@
 package org.xtwy.user;
 
 import com.google.protobuf.ByteString;
-import com.sun.org.apache.xpath.internal.operations.String;
 import org.xtwy.pb.PbClient;
 import org.xtwy.pb.protocol.EmailProbuf.Email;
 import org.xtwy.pb.protocol.RequestMsgProbuf.RequestMsg;
@@ -34,10 +33,10 @@ public class UserService {
 	}
 	public String getEmailByUser() throws Exception{
 		RequestMsg.Builder requestMsg = RequestMsg.newBuilder();
-		requestMsg.setCmd("getEmailByUser");
+		requestMsg.setCmd("httpGetEmailByUser");
 		requestMsg.setRequestParam(ByteString.copyFromUtf8("你好啊"));
 		ByteString bytes = PbClient.startClient(requestMsg);
-		return bytes.toString();
+		return bytes.toStringUtf8();
 
 	}
 

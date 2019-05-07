@@ -66,20 +66,27 @@ public class Media {
 			//获取目标方法参数类型
 			Class parameterType = method.getParameterTypes()[0];
 			if(obj instanceof RequestMsg){
-				//目标方法参数类型的所有构造方法
-				Constructor[] constructors = parameterType.getDeclaredConstructors();
-				Constructor c = null;
-				for(Constructor constructor : constructors ){
+
+				if (parameterType == String.class) {
+					ByteString requestParam =((RequestMsg)obj).getRequestParam();
+					return method.invoke(bean, requestParam.toStringUtf8());
+				} else {
+					//目标方法参数类型的所有构造方法
+					Constructor[] constructors = parameterType.getDeclaredConstructors();
+					Constructor c = null;
+					for(Constructor constructor : constructors ){
 //				if(constructor.getName().)
-					if(constructor.getParameterTypes()[0].getName().equals("boolean")){
-						c=constructor;
+						if(constructor.getParameterTypes()[0].getName().equals("boolean")){
+							c=constructor;
+						}
 					}
+					if(c!=null){
+						c.setAccessible(true);
+					}
+					//初始化参数
+					parameterObj = c.newInstance(true);
 				}
-				if(c!=null){
-					c.setAccessible(true);
-				}
-				//初始化参数
-				 parameterObj = c.newInstance(true);
+
 				ByteString requestParam =((RequestMsg)obj).getRequestParam();
 				Method parameterMethod = parameterType.getMethod("parseFrom", ByteString.class);
 				//对方法参数赋值

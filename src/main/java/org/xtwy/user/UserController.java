@@ -1,5 +1,6 @@
 package org.xtwy.user;
 
+import com.google.protobuf.ByteString;
 import org.springframework.stereotype.Controller;
 import org.xtwy.media.Remote;
 import org.xtwy.pb.protocol.EmailProbuf.Email;
@@ -32,7 +33,8 @@ public class UserController {
 	@Remote("httpGetEmailByUser")
 	public Object getEmail(String email){
 		email = email+"hhhh";
-		return email;
+		ResponseMsg response = ResponseMsg.newBuilder().setResponse(ByteString.copyFromUtf8(email)).build();
+		return response;
 	}
 	
 	
