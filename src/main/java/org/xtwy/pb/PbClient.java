@@ -39,6 +39,7 @@ public class PbClient {
 						 ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
 						 ch.pipeline().addLast(new ProtobufEncoder());
 						 ch.pipeline().addLast(new PbClientHandler());
+
 				     }
 				 });
 				

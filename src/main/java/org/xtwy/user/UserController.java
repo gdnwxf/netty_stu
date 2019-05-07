@@ -18,7 +18,7 @@ public class UserController {
 		User.Builder newUser =  user.newBuilder().setPhone("123456");
 		newUser.setId(12);
 		newUser.setUserName("ssss");
-		return newUser.build();
+		return 	ResponseMsg.newBuilder().setResponse(newUser.build().toByteString()).build();
 	}
 
 	@Remote("getEmailByUser")

@@ -19,6 +19,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TMemoryBuffer;
 import org.xtwy.http.RequestParam;
 import org.xtwy.pb.protocol.RequestMsgProbuf.RequestMsg;
+import org.xtwy.user.UserController;
 import org.xtwy.util.JsonUtils;
 
 import com.google.protobuf.ByteString;
@@ -27,6 +28,23 @@ import com.hzins.thrift.demo.ThriftRequest;
 public class Media {
 	
 	public static Map<String,MethodBean> methodBeans = new HashMap<String,MethodBean>();
+	public static UserController userController = new UserController();
+
+
+	static {
+
+		Method[] declaredMethods = UserController.class.getDeclaredMethods();
+		for (Method declaredMethod : declaredMethods) {
+
+			Remote annotation = declaredMethod.getAnnotation(Remote.class);
+			if (annotation != null) {
+				MethodBean methodBean = new MethodBean();
+				methodBean.setMethod(declaredMethod);
+				methodBean.setBean(userController);
+				methodBeans.put(annotation.value(), methodBean);
+			}
+		}
+	}
 	
 	public static Object execute(Object obj) {
 		Object response = null;

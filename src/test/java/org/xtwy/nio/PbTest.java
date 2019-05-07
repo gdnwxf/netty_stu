@@ -20,5 +20,12 @@ public class PbTest {
 		Email email = userService.getEmail();
 		System.out.println(email.getContent());
 	}
-	
+
+	@Test
+	public void httpGetEmailByUser() throws Exception{
+		UserService userService = new UserService();
+		Email email = userService.getEmail();
+		System.out.println(email.getContent());
+	}
+
 }
