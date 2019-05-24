@@ -28,8 +28,8 @@ public class DanlianTest {
         Node nextIndex = null  ;
 
         do {
-            nextIndex  = realFirst.next;
-//            nextIndex  = index.next;
+//            nextIndex  = realFirst.next;
+            nextIndex  = index.next;
 //
             realFirst.next = index.next;
             index.next = head.next;
