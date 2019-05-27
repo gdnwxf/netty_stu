@@ -40,11 +40,12 @@ public class GuavaTest {
         cache.put("a", "123");
         cache.put("b", "123");
         cache.put("c", "123");
+        cache.put("d", "123");
 
 
         System.out.println(cache.size());
 //        Object a = cache.getIfPresent("a");
-        Object v = ((LoadingCache) cache).getUnchecked("a");
+        Object v = ((LoadingCache) cache).get("a");
         System.out.println(v);
         TimeUnit.SECONDS.sleep(15);
         System.out.println(cache.size());
