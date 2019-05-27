@@ -17,7 +17,7 @@ public class GuavaTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Cache<String, Object> cache = CacheBuilder.newBuilder()
-                .expireAfterAccess(10, TimeUnit.SECONDS)
+                .refreshAfterWrite(10, TimeUnit.SECONDS)
                 .maximumSize(3)
                 .build(new CacheLoader<String, Object>() {
                     @Override
